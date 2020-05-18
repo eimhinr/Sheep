@@ -45,11 +45,10 @@ def read_text(file):
               "*","+",",","-",".","/",":",";","<",
               "=",">","?","@","[","\\","]","^","_",
               "`","{","|","}","~","–"]
-    content = [char for char in 
-                [x for x in content] 
-                if char not in spec_chars]
+    content = [char for char in #cycle every char in each word
+                [x for x in content] #cycle every line in the list
+                    if char not in spec_chars] #filter out non special chars
     return content
-    #print(content)
 
 
 def create_sub_lists(raw):
