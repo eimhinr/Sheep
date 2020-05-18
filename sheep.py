@@ -39,12 +39,22 @@ class Player():
 def read_text(file):
     with open("dataset.txt") as f:
         content = f.readlines()
+    #clean text
     content = [x.rstrip('\n\t') for x in content]
+    spec_chars = ["!",'"',"#","%","&","'","(",")",
+              "*","+",",","-",".","/",":",";","<",
+              "=",">","?","@","[","\\","]","^","_",
+              "`","{","|","}","~","–"]
+    content = [char for char in 
+                [x for x in content] 
+                if char not in spec_chars]
     return content
     #print(content)
 
+
 def create_sub_lists(raw):
     answers_dict = {}
+    
     for v in raw:
         if "From:" in v:
             answers_dict[v] = raw[raw.index(v)+2:raw.index(v)+26]
