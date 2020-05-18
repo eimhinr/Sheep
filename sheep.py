@@ -53,25 +53,42 @@ def read_text(file):
 
 def create_sub_lists(raw):
     answers_dict = {}
-    
     for v in raw:
         if "From:" in v:
             answers_dict[v] = raw[raw.index(v)+2:raw.index(v)+26]
         else:
             pass
-            #print("none")
     return answers_dict
+
+def user_names(data_dict):
+    list_of_user_names = []
+    for k in data_dict.keys():
+        k = k.lower()[6:]
+        list_of_user_names.append(k)
+    return list_of_user_names
 
 
 def process_answers(file):
     raw_answers = read_text(file)
     data_dict = create_sub_lists(raw_answers)
-    for k, v in data_dict.items():
-        print("----\n" + "".join(k))
-        print("\n".join(v))
+    # for k, v in data_dict.items():
+    #     print("----\n" + "".join(k))
+    #     print("\n".join(v))
         # for val in v:
         #     print("\n".join(val))
+    return data_dict
+
+def create_players(data_dict):
+    users = user_names(data_dict)
+    user_list = []
+    print("TEST NAMES")
+    for user in users:
+        user_list.append(Player(name=user))
+    for user in user_list:
+        print("user_class_ob")
+        print(user.name)
     
+    return user_list
 
 
 #####################################
@@ -118,7 +135,8 @@ df.head()
 
 def main():
     file = 'dataset.txt'
-    process_answers(file)
+    data_dict = process_answers(file)
+    users = create_players(data_dict)
     pass
 
 
