@@ -24,9 +24,11 @@ class Answers():
 
 class Player():
 
-    def __init__(self, name="", score=0):
+    def __init__(self, name="", score=0, number=0, answers={}):
             self.name = name
             self.score = score
+            self.number = number
+            self.answers = answers
 
 
 #####################################
@@ -71,24 +73,25 @@ def user_names(data_dict):
 def process_answers(file):
     raw_answers = read_text(file)
     data_dict = create_sub_lists(raw_answers)
-    # for k, v in data_dict.items():
-    #     print("----\n" + "".join(k))
-    #     print("\n".join(v))
-        # for val in v:
-        #     print("\n".join(val))
     return data_dict
 
 def create_players(data_dict):
     users = user_names(data_dict)
     user_list = []
     print("TEST NAMES")
+    i = 0
     for user in users:
-        user_list.append(Player(name=user))
+        #create Players with their name and player number
+        i += 1
+        user_list.append(Player(name=user, number=i))
+        print(i)
     for user in user_list:
         print("user_class_ob")
-        print(user.name)
-    
+        print("player {}: {}".format(user.number, user.name))
+    for user in user_list:
+        
     return user_list
+
 
 
 #####################################
